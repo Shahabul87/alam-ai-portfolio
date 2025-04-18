@@ -1,4 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Engineer Portfolio
+
+A modern, responsive portfolio website for AI engineers, featuring sections for projects, skills, research, publications, and a contact form.
+
+## Features
+
+- **Interactive UI**: Modern, responsive design with animations and transitions
+- **Project Showcase**: Display AI and hardware projects with filtering options
+- **Skills Section**: Highlight technical skills and competencies 
+- **Experience Timeline**: Showcase research and professional experience
+- **Awards & Publications**: Display academic achievements and research contributions
+- **Contact Form**: Functional contact form powered by EmailJS
+
+## Setup
+
+1. Clone the repository
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Run the development server:
+   ```
+   npm run dev
+   ```
+
+## Contact Form Setup
+
+The contact form is powered by EmailJS. To set it up:
+
+1. Create an account at [EmailJS](https://www.emailjs.com/)
+2. Set up your email service and template
+3. Copy `.env.local.example` to `.env.local`
+4. Add your EmailJS credentials to `.env.local`:
+   ```
+   NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id_here
+   NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id_here
+   NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key_here
+   ```
+5. For more detailed setup instructions, see the file at `src/app/setup-emailjs.md`
+
+## Deployment
+
+This is a Next.js project, which can be easily deployed to Vercel:
+
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Add the environment variables in the Vercel dashboard
+4. Deploy
+
+## Technologies Used
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- EmailJS
+
+## License
+
+[MIT](LICENSE)
 
 ## Getting Started
 

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 // Social media links data
 const socialLinks = [
@@ -31,6 +32,12 @@ const socialLinks = [
   }
 ];
 
+// EmailJS configuration
+// You'll need to create an account on EmailJS and replace these with your actual service, template, and user IDs
+const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_id";
+const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_id";
+const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "public_key";
+
 export default function ContactSection() {
   const [formState, setFormState] = useState({
     name: '',
@@ -41,10 +48,17 @@ export default function ContactSection() {
   const [activeField, setActiveField] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [animateMap, setAnimateMap] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   
   const sectionRef = useRef<HTMLElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
+  
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  }, []);
   
   // Trigger map animation when in view
   useEffect(() => {
@@ -56,24 +70,69 @@ export default function ContactSection() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormState(prev => ({ ...prev, [name]: value }));
+    
+    // Clear error when user starts typing again
+    if (error) {
+      setError(null);
+    }
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real application, you would send the form data to a server here
-    console.log('Form submitted:', formState);
-    setSubmitted(true);
+    setIsLoading(true);
+    setError(null);
     
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setFormState({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-      setSubmitted(false);
-    }, 3000);
+    // Basic validation
+    if (!formState.name.trim() || !formState.email.trim() || !formState.message.trim()) {
+      setError("Please fill in all required fields");
+      setIsLoading(false);
+      return;
+    }
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formState.email)) {
+      setError("Please enter a valid email address");
+      setIsLoading(false);
+      return;
+    }
+    
+    try {
+      // Prepare template parameters with recipient email
+      const templateParams = {
+        from_name: formState.name,
+        from_email: formState.email,
+        subject: formState.subject || "Contact Form Submission",
+        message: formState.message,
+        to_email: "sham251087@gmail.com" // Your email address
+      };
+      
+      // Send email using EmailJS
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+      
+      setSubmitted(true);
+      
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setFormState({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+        setSubmitted(false);
+      }, 5000);
+    } catch (err) {
+      console.error("Failed to send email:", err);
+      setError("Failed to send your message. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
   };
   
   // Icon component for social media
@@ -203,6 +262,12 @@ export default function ContactSection() {
                     initial={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
+                    {error && (
+                      <div className="p-3 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg mb-4">
+                        {error}
+                      </div>
+                    )}
+                    
                     <div>
                       <motion.div
                         className="relative"
@@ -284,9 +349,8 @@ export default function ContactSection() {
                           onChange={handleInputChange}
                           onFocus={() => setActiveField('subject')}
                           onBlur={() => setActiveField(null)}
-                          required
                           className="w-full px-4 py-3 bg-foreground/5 border border-foreground/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all placeholder-foreground/30"
-                          placeholder="Subject"
+                          placeholder="Subject (Optional)"
                         />
                         <AnimatePresence>
                           {activeField === 'subject' && (
@@ -342,9 +406,22 @@ export default function ContactSection() {
                     >
                       <button
                         type="submit"
-                        className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-medium shadow-lg transition-all hover:shadow-xl hover:shadow-indigo-500/20 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 w-full md:w-auto"
+                        disabled={isLoading}
+                        className={`px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-medium shadow-lg transition-all hover:shadow-xl hover:shadow-indigo-500/20 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 w-full md:w-auto relative ${isLoading ? 'opacity-80 cursor-not-allowed' : 'hover:shadow-xl hover:shadow-indigo-500/30'}`}
                       >
-                        Send Message
+                        {isLoading ? (
+                          <>
+                            <span className="opacity-0">Send Message</span>
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                              </svg>
+                            </div>
+                          </>
+                        ) : (
+                          "Send Message"
+                        )}
                       </button>
                     </motion.div>
                   </motion.form>
@@ -372,8 +449,8 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-foreground/60">Email</h4>
-                    <a href="mailto:contact@yourdomain.com" className="text-lg hover:text-indigo-600 transition-colors">
-                      contact@yourdomain.com
+                    <a href="mailto:sham251087@gmail.com" className="text-lg hover:text-indigo-600 transition-colors">
+                      sham251087@gmail.com
                     </a>
                   </div>
                 </div>

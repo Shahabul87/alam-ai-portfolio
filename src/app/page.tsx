@@ -136,6 +136,54 @@ export default function Home() {
         </div>
       </section>
       
+      {/* Education teaser section */}
+      <section className="py-16 bg-foreground/5">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-6">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-teal-600">
+              Academic Background
+            </span>
+          </h2>
+          <p className="text-foreground/70 max-w-2xl mx-auto mb-8">
+            Advanced coursework in statistics, mathematics, and computing with specialized AI training.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-10">
+            <div className="p-6 bg-foreground/5 rounded-lg border border-foreground/10">
+              <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center rounded-full bg-gradient-to-br from-purple-500/20 to-indigo-500/20 text-2xl">
+                📊
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Statistical Methods</h3>
+              <p className="text-sm text-foreground/70">Bayesian Statistics, Multivariate Analysis, Time Series Analysis</p>
+            </div>
+            
+            <div className="p-6 bg-foreground/5 rounded-lg border border-foreground/10">
+              <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 text-2xl">
+                🧠
+              </div>
+              <h3 className="text-lg font-semibold mb-2">AI Specialization</h3>
+              <p className="text-sm text-foreground/70">Deep Learning, Probability Theory, Random Signal Estimation</p>
+            </div>
+            
+            <div className="p-6 bg-foreground/5 rounded-lg border border-foreground/10">
+              <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center rounded-full bg-gradient-to-br from-green-500/20 to-teal-500/20 text-2xl">
+                💻
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Research Computing</h3>
+              <p className="text-sm text-foreground/70">Advanced Algorithms, High Performance Computing, Research Methods</p>
+            </div>
+          </div>
+          
+          <Link href="/education">
+            <button
+              className="px-8 py-3 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-full font-medium shadow-lg"
+            >
+              View Academic Background
+            </button>
+          </Link>
+        </div>
+      </section>
+      
       {/* Awards & Publications teaser */}
       <section className="py-16">
         <div className="container mx-auto px-4 text-center">
