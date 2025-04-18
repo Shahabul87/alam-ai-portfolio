@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const technologies = [
   "Machine Learning", "Neural Networks", "Computer Vision", 
@@ -168,7 +169,9 @@ export default function HeroSection() {
                   whileTap={{ scale: 0.95 }}
                   className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-medium shadow-lg shadow-indigo-500/20 transition-all hover:shadow-xl hover:shadow-indigo-500/30"
                 >
-                  View Projects
+                  <Link href="/projects" className="w-full h-full flex items-center justify-center">
+                    View Projects
+                  </Link>
                 </motion.button>
                 
                 <motion.button
@@ -176,7 +179,9 @@ export default function HeroSection() {
                   whileTap={{ scale: 0.95 }}
                   className="px-8 py-3 border border-foreground/20 rounded-full font-medium transition-all hover:bg-foreground/5"
                 >
-                  Contact Me
+                  <Link href="/contact" className="w-full h-full flex items-center justify-center">
+                    Contact Me
+                  </Link>
                 </motion.button>
               </div>
             </motion.div>
