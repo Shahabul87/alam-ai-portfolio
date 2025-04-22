@@ -124,38 +124,34 @@ export default function Header() {
   return (
     <header 
       ref={headerRef}
-      className={`relative w-full transition-all duration-300 ${
-        scrollY > 50 ? 'py-3 bg-opacity-90 backdrop-blur-md' : 'py-5'
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+        scrollY > 50 ? 'py-3 backdrop-blur-md bg-slate-900/70' : 'py-5 bg-transparent'
       }`}
-      style={{
-        backgroundColor: `var(--background)`,
-        boxShadow: scrollY > 50 ? '0 4px 30px rgba(0, 0, 0, 0.1)' : 'none'
-      }}
     >
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full pointer-events-none"
       />
       
-      <div className="container mx-auto px-4 flex justify-between items-center z-10 relative">
+      <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-16 flex justify-between items-center z-10 relative">
         {/* Logo */}
         <div className="flex items-center space-x-2">
           <div className="w-10 h-10 relative">
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-600 rounded-lg transform rotate-45" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-lg transform rotate-45" />
             <div className="absolute inset-0 flex items-center justify-center font-bold text-white">
               AI
             </div>
           </div>
           <span className="text-xl font-semibold tracking-tight font-mono">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 glow-purple">
               Alam
             </span>
-            <span className="text-foreground">.dev</span>
+            <span className="text-slate-300">.dev</span>
           </span>
         </div>
         
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
+        {/* Desktop Navigation - with max width to ensure spacing */}
+        <nav className="hidden md:flex items-center justify-end space-x-4 lg:space-x-8">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -164,13 +160,13 @@ export default function Header() {
                 href={item.href}
                 className={`relative py-2 text-sm font-medium transition-colors ${
                   isActive 
-                    ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 font-semibold' 
-                    : 'text-foreground hover:text-blue-500'
+                    ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 glow-purple' 
+                    : 'text-slate-300 hover:text-white'
                 }`}
               >
                 {item.name}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-600" />
+                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-500" />
                 )}
               </Link>
             );
@@ -184,17 +180,17 @@ export default function Header() {
           aria-label="Toggle menu"
         >
           <span 
-            className={`block w-6 h-0.5 bg-foreground transition-transform duration-300 ${
+            className={`block w-6 h-0.5 bg-slate-300 transition-transform duration-300 ${
               isMenuOpen ? 'transform rotate-45 translate-y-2' : ''
             }`}
           />
           <span 
-            className={`block w-6 h-0.5 bg-foreground transition-opacity duration-300 ${
+            className={`block w-6 h-0.5 bg-slate-300 transition-opacity duration-300 ${
               isMenuOpen ? 'opacity-0' : 'opacity-100'
             }`}
           />
           <span 
-            className={`block w-6 h-0.5 bg-foreground transition-transform duration-300 ${
+            className={`block w-6 h-0.5 bg-slate-300 transition-transform duration-300 ${
               isMenuOpen ? 'transform -rotate-45 -translate-y-2' : ''
             }`}
           />
@@ -203,14 +199,12 @@ export default function Header() {
       
       {/* Mobile Navigation */}
       <div 
-        className={`md:hidden absolute left-0 right-0 z-20 transition-all duration-300 ease-in-out backdrop-blur-md ${
+        className={`md:hidden absolute left-0 right-0 z-20 transition-all duration-300 ease-in-out backdrop-blur-md bg-slate-900/90 ${
           isMenuOpen 
             ? 'max-h-64 opacity-100 visible py-4'
             : 'max-h-0 opacity-0 invisible py-0 overflow-hidden'
         }`}
         style={{
-          backgroundColor: `var(--background)`,
-          boxShadow: isMenuOpen ? '0 4px 30px rgba(0, 0, 0, 0.1)' : 'none',
           top: scrollY > 50 ? '61px' : '77px'
         }}
       >
@@ -223,8 +217,8 @@ export default function Header() {
                 href={item.href}
                 className={`py-2 text-sm font-medium ${
                   isActive 
-                    ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 font-semibold' 
-                    : 'text-foreground'
+                    ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 glow-purple' 
+                    : 'text-slate-300'
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >

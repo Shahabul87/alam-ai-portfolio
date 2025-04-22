@@ -1,4 +1,4 @@
-import ProjectsSection from '../components/ProjectsSection';
+import ProjectsContent from './ProjectsContent';
 
 export const metadata = {
   title: 'Projects | AI Engineer Portfolio',
@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function ProjectsPage() {
-  return <ProjectsSection />;
+  return <ProjectsContent />;
 } 

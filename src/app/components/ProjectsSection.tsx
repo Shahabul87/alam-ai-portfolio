@@ -248,178 +248,180 @@ export default function ProjectsSection() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative py-20 overflow-hidden bg-background"
+      className="w-full py-12 relative overflow-hidden"
       id="projects"
     >
       {/* Background decorative elements */}
-      <div className="absolute inset-0 pointer-events-none opacity-5">
+      <div className="absolute inset-0 pointer-events-none opacity-10">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(124,58,237,0.3)_0%,rgba(0,0,0,0)_35%)]" />
         <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.3)_0%,rgba(0,0,0,0)_35%)]" />
       </div>
       
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-              Projects Portfolio
-            </span>
-          </h2>
-          <p className="text-foreground/70 max-w-2xl mx-auto text-lg">
-            A showcase of AI, machine learning, and hardware engineering projects spanning from 
-            cutting-edge transformer architectures to innovative embedded systems solutions.
-          </p>
-        </motion.div>
-        
-        {/* Tab selector for Recent/Past */}
-        <div className="flex justify-center mb-8">
-          <div className="flex p-1 bg-foreground/5 rounded-full">
-            <button
-              onClick={() => setActiveTab('recent')}
-              className={`px-6 py-2 rounded-full font-medium text-sm transition-all ${
-                activeTab === 'recent' 
-                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md' 
-                  : 'text-foreground/70 hover:text-foreground'
-              }`}
-            >
-              Recent Key Projects
-            </button>
-            <button
-              onClick={() => setActiveTab('past')}
-              className={`px-6 py-2 rounded-full font-medium text-sm transition-all ${
-                activeTab === 'past' 
-                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md' 
-                  : 'text-foreground/70 hover:text-foreground'
-              }`}
-            >
-              Past Projects & Supervision
-            </button>
-          </div>
-        </div>
-        
-        {/* Category filter */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {categories.map((category) => (
-            <motion.button
-              key={category.id}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveCategory(category.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                activeCategory === category.id 
-                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md' 
-                  : 'bg-foreground/5 hover:bg-foreground/10'
-              }`}
-            >
-              {category.name}
-            </motion.button>
-          ))}
-        </div>
-        
-        {/* Project cards */}
-        <AnimatePresence mode="wait">
+      <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-16">
+        <div className="max-w-screen-2xl mx-auto">
           <motion.div
-            key={`${activeTab}-${activeCategory}`}
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-14"
           >
-            {filteredProjects.map((project, index) => (
-              <motion.div
-                key={`${project.title}-${index}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)' }}
-                className={`bg-foreground/5 backdrop-blur-sm rounded-xl border border-foreground/10 p-6 transition-all h-full flex flex-col ${
-                  'featured' in project && project.featured ? 'md:col-span-2' : ''
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 glow-blue">
+                Projects Portfolio
+              </span>
+            </h2>
+            <p className="text-slate-300 max-w-2xl mx-auto text-lg">
+              A showcase of AI, machine learning, and hardware engineering projects spanning from 
+              cutting-edge transformer architectures to innovative embedded systems solutions.
+            </p>
+          </motion.div>
+          
+          {/* Tab selector for Recent/Past */}
+          <div className="flex justify-center mb-8">
+            <div className="flex p-1 bg-slate-800/60 rounded-full">
+              <button
+                onClick={() => setActiveTab('recent')}
+                className={`px-6 py-2 rounded-full font-medium text-sm transition-all ${
+                  activeTab === 'recent' 
+                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md' 
+                    : 'text-slate-300 hover:text-white'
                 }`}
               >
-                <div className="flex items-start gap-4 mb-4">
-                  <div className={`flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br ${
-                    project.color
-                  } text-white text-2xl`}>
-                    {project.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                    {'student' in project && (
-                      <p className="text-foreground/60 text-sm mb-1">
-                        Supervised: {project.student} ({project.year})
-                      </p>
-                    )}
-                  </div>
-                </div>
-                
-                <p className="text-foreground/70 mb-4 flex-grow">
-                  {'description' in project ? project.description : ''}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {'tags' in project && project.tags.map((tag, i) => (
-                    <span 
-                      key={i} 
-                      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-foreground/10"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                
-                {'link' in project && (
-                  <Link 
-                    href={project.link} 
-                    className="mt-4 text-indigo-600 dark:text-indigo-400 text-sm hover:underline inline-flex items-center"
-                  >
-                    View details
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </Link>
-                )}
-              </motion.div>
+                Recent Key Projects
+              </button>
+              <button
+                onClick={() => setActiveTab('past')}
+                className={`px-6 py-2 rounded-full font-medium text-sm transition-all ${
+                  activeTab === 'past' 
+                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md' 
+                    : 'text-slate-300 hover:text-white'
+                }`}
+              >
+                Past Projects & Supervision
+              </button>
+            </div>
+          </div>
+          
+          {/* Category filter */}
+          <div className="flex flex-wrap justify-center gap-2 mb-12">
+            {categories.map((category) => (
+              <motion.button
+                key={category.id}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setActiveCategory(category.id)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  activeCategory === category.id 
+                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md' 
+                    : 'bg-slate-800/60 hover:bg-slate-700/60 text-slate-300'
+                }`}
+              >
+                {category.name}
+              </motion.button>
             ))}
-          </motion.div>
-        </AnimatePresence>
-        
-        {/* Featured projects callout */}
-        {activeTab === 'recent' && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="mt-16 p-8 bg-foreground/5 backdrop-blur-sm rounded-xl border border-foreground/10 text-center"
-          >
-            <div className="mb-4 text-2xl">🚀</div>
-            <h3 className="text-xl font-semibold mb-2">AI Research & Engineering Focus</h3>
-            <p className="text-foreground/70 max-w-2xl mx-auto">
-              My recent work focuses on transformer architectures, large language models, and performance optimization
-              techniques that push the boundaries of what&apos;s possible with modern AI systems.
-            </p>
-          </motion.div>
-        )}
-        
-        {activeTab === 'past' && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="mt-16 p-8 bg-foreground/5 backdrop-blur-sm rounded-xl border border-foreground/10 text-center"
-          >
-            <div className="mb-4 text-2xl">💡</div>
-            <h3 className="text-xl font-semibold mb-2">Interdisciplinary Engineering Background</h3>
-            <p className="text-foreground/70 max-w-2xl mx-auto">
-              With a foundation in hardware design, embedded systems, and IoT solutions, I bring a unique
-              interdisciplinary perspective to my AI and machine learning work.
-            </p>
-          </motion.div>
-        )}
+          </div>
+          
+          {/* Project cards */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`${activeTab}-${activeCategory}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {filteredProjects.map((project, index) => (
+                <motion.div
+                  key={`${project.title}-${index}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.3)' }}
+                  className={`bg-slate-800/40 backdrop-blur-sm rounded-xl border border-slate-700/50 p-6 transition-all h-full flex flex-col ${
+                    'featured' in project && project.featured ? 'md:col-span-2' : ''
+                  }`}
+                >
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className={`flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br ${
+                      project.color
+                    } text-white text-2xl`}>
+                      {project.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold mb-2 text-white">{project.title}</h3>
+                      {'student' in project && (
+                        <p className="text-slate-400 text-sm mb-1">
+                          Supervised: {project.student} ({project.year})
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <p className="text-slate-300 mb-4 flex-grow">
+                    {'description' in project ? project.description : ''}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {'tags' in project && project.tags.map((tag, i) => (
+                      <span 
+                        key={i} 
+                        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-slate-200"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  {'link' in project && (
+                    <Link 
+                      href={project.link} 
+                      className="mt-4 text-indigo-400 text-sm hover:underline inline-flex items-center"
+                    >
+                      View details
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </Link>
+                  )}
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+          
+          {/* Featured projects callout */}
+          {activeTab === 'recent' && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="mt-16 p-8 bg-slate-800/40 backdrop-blur-sm rounded-xl border border-slate-700/50 text-center"
+            >
+              <div className="mb-4 text-2xl">🚀</div>
+              <h3 className="text-xl font-semibold mb-2 text-white">AI Research & Engineering Focus</h3>
+              <p className="text-slate-300 max-w-2xl mx-auto">
+                My recent work focuses on transformer architectures, large language models, and performance optimization
+                techniques that push the boundaries of what&apos;s possible with modern AI systems.
+              </p>
+            </motion.div>
+          )}
+          
+          {activeTab === 'past' && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="mt-16 p-8 bg-slate-800/40 backdrop-blur-sm rounded-xl border border-slate-700/50 text-center"
+            >
+              <div className="mb-4 text-2xl">💡</div>
+              <h3 className="text-xl font-semibold mb-2 text-white">Interdisciplinary Engineering Background</h3>
+              <p className="text-slate-300 max-w-2xl mx-auto">
+                With a foundation in hardware design, embedded systems, and IoT solutions, I bring a unique
+                interdisciplinary perspective to my AI and machine learning work.
+              </p>
+            </motion.div>
+          )}
+        </div>
       </div>
     </section>
   );

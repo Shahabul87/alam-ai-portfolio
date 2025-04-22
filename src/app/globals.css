@@ -5,6 +5,11 @@
   --foreground: #171717;
 }
 
+.dark {
+  --background: #0f172a; /* slate-900 */
+  --foreground: #f8fafc; /* slate-50 */
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -12,17 +17,8 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+html.dark {
+  color-scheme: dark;
 }
 
 /* Custom animations for hero section */
@@ -68,6 +64,64 @@ body {
   }
 }
 
+/* Tensor visualization animations */
+@keyframes tensor-float {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-8px) translateX(3px);
+  }
+  50% {
+    transform: translateY(0px) translateX(7px);
+  }
+  75% {
+    transform: translateY(5px) translateX(2px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+@keyframes tensor-glow {
+  0% {
+    box-shadow: 0 0 10px rgba(79, 70, 229, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(79, 70, 229, 0.3);
+  }
+}
+
+@keyframes tensor-pulse {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+}
+
+.animate-tensor-float {
+  animation: tensor-float 6s ease-in-out infinite;
+}
+
+.animate-tensor-glow {
+  animation: tensor-glow 4s ease-in-out infinite;
+}
+
+.animate-tensor-pulse {
+  animation: tensor-pulse 3s ease-in-out infinite;
+}
+
 .animate-spin-slow {
   animation: spin-slow 12s linear infinite;
 }
@@ -82,4 +136,30 @@ body {
 
 .animate-pulse-slow {
   animation: pulse-slow 5s ease-in-out infinite;
+}
+
+/* Dark mode glow effects */
+.glow-purple {
+  text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+}
+
+.glow-blue {
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.dark-card {
+  background-color: rgba(30, 41, 59, 0.5); /* slate-800 with transparency */
+  border: 1px solid rgba(71, 85, 105, 0.2); /* slate-600 with transparency */
+  backdrop-filter: blur(8px);
+}
+
+/* Force tensor visualization containers to be transparent */
+canvas {
+  background: transparent !important;
+}
+
+.tensor-container {
+  background: transparent !important;
+  border: none !important;
+  overflow: visible !important;
 }

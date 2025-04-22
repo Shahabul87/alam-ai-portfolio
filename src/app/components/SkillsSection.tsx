@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, useInView, useScroll, useTransform, MotionValue } from 'framer-motion';
 
 // Skill categories with proficiency levels
@@ -24,7 +24,7 @@ const skillCategories = [
       { name: "Hugging Face Transformers", level: 95 },
     ],
     icon: "🔥",
-    color: "from-orange-500 to-red-600",
+    color: "from-indigo-600 to-purple-600",
   },
   {
     name: "Scalable Training",
@@ -37,7 +37,7 @@ const skillCategories = [
       { name: "Mixed Precision (AMP)", level: 94 },
     ],
     icon: "⚡",
-    color: "from-yellow-500 to-amber-600",
+    color: "from-blue-600 to-indigo-600",
   },
   {
     name: "Reinforcement Learning",
@@ -48,7 +48,7 @@ const skillCategories = [
       { name: "Multi-agent Systems", level: 86 },
     ],
     icon: "🤖",
-    color: "from-green-500 to-emerald-600",
+    color: "from-indigo-600 to-purple-600",
   },
   {
     name: "Data Engineering",
@@ -58,7 +58,7 @@ const skillCategories = [
       { name: "Streaming Pipelines", level: 92 },
     ],
     icon: "📊",
-    color: "from-purple-500 to-violet-600",
+    color: "from-blue-600 to-indigo-600",
   },
   {
     name: "Cloud & DevOps",
@@ -70,7 +70,7 @@ const skillCategories = [
       { name: "GitOps", level: 85 },
     ],
     icon: "☁️",
-    color: "from-cyan-500 to-blue-600",
+    color: "from-indigo-600 to-purple-600",
   },
   {
     name: "Full Stack Dev",
@@ -82,7 +82,7 @@ const skillCategories = [
       { name: "REST APIs", level: 92 },
     ],
     icon: "💻",
-    color: "from-pink-500 to-rose-600",
+    color: "from-blue-600 to-indigo-600",
   },
 ];
 
@@ -178,7 +178,7 @@ export default function SkillsSection() {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-20 overflow-hidden bg-background"
+      className="relative py-20 overflow-hidden w-full"
       id="skills"
     >
       {/* Neural network background */}
@@ -191,31 +191,31 @@ export default function SkillsSection() {
         {/* Nodes would be rendered here in a full implementation */}
       </motion.div>
       
-      <div className="container mx-auto px-4">
+      <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 max-w-screen-lg mx-auto"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 glow-purple">
               Research & Technical Skills
             </span>
           </h2>
-          <p className="text-foreground/70 max-w-2xl mx-auto text-lg">
+          <p className="text-slate-300 max-w-2xl mx-auto text-lg">
             Specialized in designing, training, and evaluating transformer-based generative language and vision models
             with extensive research and teaching experience.
           </p>
         </motion.div>
         
         {/* Technical achievements */}
-        <div className="mb-20">
+        <div className="mb-20 max-w-screen-xl mx-auto">
           <motion.h3
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-2xl font-bold mb-8 text-center"
+            className="text-2xl font-bold mb-8 text-center text-slate-100"
           >
             Key Technical Achievements
           </motion.h3>
@@ -227,15 +227,15 @@ export default function SkillsSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.1 * index + 0.3 }}
-                className="bg-foreground/5 backdrop-blur-sm p-6 rounded-xl border border-foreground/10 hover:shadow-lg transition-all hover:bg-foreground/10"
+                className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700/50 hover:shadow-lg transition-all hover:bg-slate-800/70"
               >
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 text-2xl">
+                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 text-2xl">
                     {achievement.icon}
                   </div>
                   <div>
-                    <h4 className="text-xl font-semibold mb-2">{achievement.title}</h4>
-                    <p className="text-foreground/70">{achievement.description}</p>
+                    <h4 className="text-xl font-semibold mb-2 text-slate-100">{achievement.title}</h4>
+                    <p className="text-slate-300">{achievement.description}</p>
                   </div>
                 </div>
               </motion.div>
@@ -248,9 +248,9 @@ export default function SkillsSection() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-20"
+          className="mb-20 max-w-screen-xl mx-auto"
         >
-          <h3 className="text-2xl font-bold mb-8 text-center">Core Competencies</h3>
+          <h3 className="text-2xl font-bold mb-8 text-center text-slate-100">Core Competencies</h3>
           
           {/* Skill category tabs */}
           <div className="flex flex-wrap justify-center gap-2 mb-10">
@@ -263,7 +263,7 @@ export default function SkillsSection() {
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   activeCategory === index 
                     ? `bg-gradient-to-r ${category.color} text-white shadow-md` 
-                    : 'bg-foreground/5 hover:bg-foreground/10'
+                    : 'bg-slate-800/50 hover:bg-slate-700/50 text-slate-300'
                 }`}
               >
                 <span className="mr-2">{category.icon}</span>
@@ -273,8 +273,8 @@ export default function SkillsSection() {
           </div>
           
           {/* Skills display */}
-          <div className="bg-foreground/5 backdrop-blur-sm rounded-2xl p-6 border border-foreground/10">
-            <h4 className="text-xl font-semibold mb-4 flex items-center">
+          <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50">
+            <h4 className="text-xl font-semibold mb-4 flex items-center text-slate-100">
               <span className="mr-2 text-2xl">{skillCategories[activeCategory].icon}</span>
               {skillCategories[activeCategory].name}
             </h4>
@@ -289,10 +289,10 @@ export default function SkillsSection() {
                   className="relative"
                 >
                   <div className="flex justify-between mb-1">
-                    <span className="font-medium">{skill.name}</span>
-                    <span className="text-sm text-foreground/60">{skill.level}%</span>
+                    <span className="font-medium text-slate-200">{skill.name}</span>
+                    <span className="text-sm text-slate-400">{skill.level}%</span>
                   </div>
-                  <div className="w-full h-3 bg-foreground/10 rounded-full overflow-hidden">
+                  <div className="w-full h-3 bg-slate-700/50 rounded-full overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${skill.level}%` }}
@@ -311,8 +311,9 @@ export default function SkillsSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.6 }}
+          className="max-w-screen-xl mx-auto"
         >
-          <h3 className="text-2xl font-bold mb-8 text-center">Research Experience</h3>
+          <h3 className="text-2xl font-bold mb-8 text-center text-slate-100">Research Experience</h3>
           
           <div className="space-y-8">
             {researchExperience.map((exp, index) => (
@@ -321,23 +322,23 @@ export default function SkillsSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.1 * index + 0.7 }}
-                className="relative pl-6 border-l-2 border-foreground/20 pb-6"
+                className="relative pl-6 border-l-2 border-slate-600/50 pb-6"
               >
                 {/* Timeline dot */}
-                <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600" />
+                <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-gradient-to-r from-blue-600 to-purple-600" />
                 
-                <div className="bg-foreground/5 backdrop-blur-sm p-6 rounded-xl border border-foreground/10 hover:bg-foreground/10 transition-all">
-                  <h4 className="text-xl font-semibold mb-1">{exp.title}</h4>
-                  <p className="text-foreground/70 mb-4">
+                <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700/50 hover:bg-slate-800/70 transition-all">
+                  <h4 className="text-xl font-semibold mb-1 text-slate-100">{exp.title}</h4>
+                  <p className="text-slate-300 mb-4">
                     {exp.organization}
-                    {exp.duration && <span className="ml-2 text-sm">({exp.duration})</span>}
+                    {exp.duration && <span className="ml-2 text-sm text-slate-400">({exp.duration})</span>}
                   </p>
                   
                   <ul className="space-y-2">
                     {exp.details.map((detail, i) => (
                       <li key={i} className="flex items-start gap-2">
-                        <span className="text-indigo-500 mt-1">•</span>
-                        <span className="text-foreground/80">{detail}</span>
+                        <span className="text-blue-400 mt-1">•</span>
+                        <span className="text-slate-300">{detail}</span>
                       </li>
                     ))}
                   </ul>
@@ -352,9 +353,9 @@ export default function SkillsSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-16"
+          className="mt-16 max-w-screen-xl mx-auto"
         >
-          <h3 className="text-2xl font-bold mb-8 text-center">Professional Skills</h3>
+          <h3 className="text-2xl font-bold mb-8 text-center text-slate-100">Professional Skills</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
@@ -370,21 +371,21 @@ export default function SkillsSection() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4, delay: 0.1 * index + 0.9 }}
-                className="bg-foreground/5 backdrop-blur-sm rounded-xl border border-foreground/10 p-6 flex flex-col items-center text-center hover:bg-foreground/10 transition-all"
+                className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 p-6 flex flex-col items-center text-center hover:bg-slate-800/70 transition-all"
               >
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center text-3xl mb-4">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center text-3xl mb-4">
                   {skill.icon}
                 </div>
-                <h4 className="text-lg font-semibold mb-2">{skill.title}</h4>
-                <div className="w-full h-2 bg-foreground/10 rounded-full overflow-hidden mt-2">
+                <h4 className="text-lg font-semibold mb-2 text-slate-100">{skill.title}</h4>
+                <div className="w-full h-2 bg-slate-700/50 rounded-full overflow-hidden mt-2">
                   <motion.div
                     initial={{ width: 0 }}
                     animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
                     transition={{ duration: 1, delay: 0.1 * index + 1 }}
-                    className="h-full rounded-full bg-gradient-to-r from-indigo-600 to-purple-600"
+                    className="h-full rounded-full bg-gradient-to-r from-blue-600 to-purple-600"
                   />
                 </div>
-                <span className="text-sm text-foreground/60 mt-1">{skill.level}%</span>
+                <span className="text-sm text-slate-400 mt-1">{skill.level}%</span>
               </motion.div>
             ))}
           </div>

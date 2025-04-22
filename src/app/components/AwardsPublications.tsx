@@ -9,37 +9,37 @@ const awards = [
     title: "President Gold Medal 2010",
     description: "Highest National Honor in Bangladesh for Undergraduate",
     icon: "🏅",
-    color: "from-amber-500 to-yellow-500",
+    color: "from-blue-600 to-indigo-600",
   },
   {
     title: "Prime Minister Gold Medal 2010",
     description: "Highest National Honor in Bangladesh for Undergraduate",
     icon: "🏆",
-    color: "from-amber-500 to-orange-500",
+    color: "from-indigo-600 to-purple-600",
   },
   {
     title: "Dean List Award",
     description: "Khulna University of Engineering & Technology, 2007-2010",
     icon: "🎓",
-    color: "from-blue-500 to-indigo-500",
+    color: "from-blue-600 to-indigo-600",
   },
   {
     title: "University Technical Scholarship",
     description: "2006-2010",
     icon: "📚",
-    color: "from-purple-500 to-violet-500",
+    color: "from-indigo-600 to-purple-600",
   },
   {
     title: "UGC Scholarship",
     description: "University Grants Commission of Bangladesh, 2010",
     icon: "💰",
-    color: "from-green-500 to-emerald-500",
+    color: "from-blue-600 to-indigo-600",
   },
   {
     title: "KUET Students Merit Scholarship",
     description: "Government of the People's Republic of Bangladesh",
     icon: "🎯",
-    color: "from-red-500 to-rose-500",
+    color: "from-indigo-600 to-purple-600",
   },
 ];
 
@@ -138,28 +138,29 @@ export default function AwardsPublications() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative py-20 overflow-hidden bg-background"
+      className="relative py-20 overflow-hidden w-full"
       id="awards-publications"
     >
       {/* Background decorative elements */}
-      <div className="absolute inset-0 pointer-events-none opacity-5">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.3)_0%,rgba(0,0,0,0)_35%)]" />
-        <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.3)_0%,rgba(0,0,0,0)_35%)]" />
+      <div className="absolute inset-0 pointer-events-none opacity-10">
+        <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-gradient-to-r from-blue-500/30 to-purple-500/30 blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-60 h-60 rounded-full bg-gradient-to-r from-blue-500/30 to-indigo-500/30 blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-gradient-to-r from-indigo-500/10 to-purple-500/10 blur-3xl" />
       </div>
       
-      <div className="container mx-auto px-4">
+      <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 max-w-screen-lg mx-auto"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 glow-purple">
               Awards & Publications
             </span>
           </h2>
-          <p className="text-foreground/70 max-w-2xl mx-auto text-lg">
+          <p className="text-slate-300 max-w-2xl mx-auto text-lg">
             Academic recognitions and research contributions in the field of artificial intelligence
             and engineering.
           </p>
@@ -167,13 +168,13 @@ export default function AwardsPublications() {
         
         {/* Tab selector */}
         <div className="flex justify-center mb-12">
-          <div className="flex p-1 bg-foreground/5 rounded-full">
+          <div className="flex p-1 bg-slate-800/50 rounded-full">
             <button
               onClick={() => handleSectionChange('awards')}
               className={`px-6 py-2 rounded-full font-medium text-sm transition-all ${
                 activeSection === 'awards' 
-                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md' 
-                  : 'text-foreground/70 hover:text-foreground'
+                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md' 
+                  : 'text-slate-300 hover:text-white'
               }`}
             >
               Awards & Honors
@@ -182,8 +183,8 @@ export default function AwardsPublications() {
               onClick={() => handleSectionChange('publications')}
               className={`px-6 py-2 rounded-full font-medium text-sm transition-all ${
                 activeSection === 'publications' 
-                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md' 
-                  : 'text-foreground/70 hover:text-foreground'
+                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md' 
+                  : 'text-slate-300 hover:text-white'
               }`}
             >
               Publications
@@ -191,264 +192,266 @@ export default function AwardsPublications() {
           </div>
         </div>
         
-        {/* Awards Section */}
-        <AnimatePresence mode="wait">
-          {activeSection === 'awards' && (
-            <motion.div
-              key="awards"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {awards.map((award, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)' }}
-                    className="bg-foreground/5 rounded-xl border border-foreground/10 p-6 transition-all"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className={`flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br ${award.color} text-white text-2xl`}>
-                        {award.icon}
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-semibold mb-2">{award.title}</h3>
-                        <p className="text-foreground/70">{award.description}</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-              
-              {/* Certificate decoration */}
+        <div className="max-w-screen-xl mx-auto">
+          {/* Awards Section */}
+          <AnimatePresence mode="wait">
+            {activeSection === 'awards' && (
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="mt-12 p-8 bg-foreground/5 backdrop-blur-sm rounded-xl border border-foreground/10 text-center"
-              >
-                <div className="mb-4 text-2xl">🎖️</div>
-                <h3 className="text-xl font-semibold mb-2">Academic Excellence</h3>
-                <p className="text-foreground/70 max-w-2xl mx-auto">
-                  Recognized at national and institutional levels for academic and research excellence, 
-                  including the highest national honors in Bangladesh for undergraduate achievement.
-                </p>
-              </motion.div>
-            </motion.div>
-          )}
-          
-          {/* Publications Section */}
-          {activeSection === 'publications' && (
-            <motion.div
-              key="publications"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-            >
-              {/* Filter and sort controls */}
-              <div className="flex flex-wrap justify-center gap-4 mb-8">
-                <div className="flex p-1 bg-foreground/5 rounded-full">
-                  <button
-                    onClick={() => setFilterType('all')}
-                    className={`px-4 py-1 rounded-full text-xs font-medium transition-all ${
-                      filterType === 'all' 
-                        ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm' 
-                        : 'text-foreground/70 hover:text-foreground'
-                    }`}
-                  >
-                    All Publications
-                  </button>
-                  <button
-                    onClick={() => setFilterType('journal')}
-                    className={`px-4 py-1 rounded-full text-xs font-medium transition-all ${
-                      filterType === 'journal' 
-                        ? 'bg-gradient-to-r from-purple-600 to-violet-600 text-white shadow-sm' 
-                        : 'text-foreground/70 hover:text-foreground'
-                    }`}
-                  >
-                    Journal Papers
-                  </button>
-                  <button
-                    onClick={() => setFilterType('conference')}
-                    className={`px-4 py-1 rounded-full text-xs font-medium transition-all ${
-                      filterType === 'conference' 
-                        ? 'bg-gradient-to-r from-emerald-600 to-green-600 text-white shadow-sm' 
-                        : 'text-foreground/70 hover:text-foreground'
-                    }`}
-                  >
-                    Conference Papers
-                  </button>
-                </div>
-                
-                <div className="flex p-1 bg-foreground/5 rounded-full">
-                  <button
-                    onClick={() => setSortBy('year')}
-                    className={`px-4 py-1 rounded-full text-xs font-medium transition-all ${
-                      sortBy === 'year' 
-                        ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-sm' 
-                        : 'text-foreground/70 hover:text-foreground'
-                    }`}
-                  >
-                    Sort by Year
-                  </button>
-                  <button
-                    onClick={() => setSortBy('field')}
-                    className={`px-4 py-1 rounded-full text-xs font-medium transition-all ${
-                      sortBy === 'field' 
-                        ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-sm' 
-                        : 'text-foreground/70 hover:text-foreground'
-                    }`}
-                  >
-                    Sort by Field
-                  </button>
-                </div>
-              </div>
-              
-              {/* Publications list */}
-              <div className="space-y-6">
-                {filteredPublications.map((publication, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="bg-foreground/5 backdrop-blur-sm rounded-xl border border-foreground/10 overflow-hidden transition-all hover:bg-foreground/10"
-                  >
-                    <div 
-                      className="p-6 cursor-pointer"
-                      onClick={() => setSelectedPublication(selectedPublication === index ? null : index)}
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className={`flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full ${
-                          publication.type === 'journal' 
-                            ? 'bg-gradient-to-br from-purple-600 to-violet-600' 
-                            : 'bg-gradient-to-br from-emerald-600 to-green-600'
-                        } text-white text-2xl`}>
-                          {publication.type === 'journal' ? '📰' : '🎤'}
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex justify-between items-start">
-                            <div>
-                              <h3 className="text-xl font-semibold mb-1">
-                                {publication.title}
-                              </h3>
-                              <p className="text-foreground/70 text-sm mb-2">
-                                {publication.authors.split(',')[0]} et al. ({publication.year})
-                              </p>
-                              <div className="flex flex-wrap gap-2">
-                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-foreground/10">
-                                  {publication.field}
-                                </span>
-                                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                                  publication.type === 'journal' 
-                                    ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300' 
-                                    : 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300'
-                                }`}>
-                                  {publication.type === 'journal' ? 'Journal' : 'Conference'}
-                                </span>
-                              </div>
-                            </div>
-                            <button className="text-foreground/50">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className={`h-5 w-5 transition-transform ${selectedPublication === index ? 'transform rotate-180' : ''}`}
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                              </svg>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {selectedPublication === index && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="px-6 pb-6"
-                      >
-                        <div className="pt-4 ml-16 border-t border-foreground/10">
-                          <div className="mb-4">
-                            <h4 className="font-medium mb-1">Authors:</h4>
-                            <p className="text-foreground/80 text-sm">{publication.authors}</p>
-                          </div>
-                          
-                          <div className="mb-4">
-                            <h4 className="font-medium mb-1">{publication.type === 'journal' ? 'Journal:' : 'Conference:'}</h4>
-                            <p className="text-foreground/80 text-sm">
-                              {publication.type === 'journal' ? publication.journal : publication.conference}
-                              {publication.volume && `, ${publication.volume}`}
-                            </p>
-                          </div>
-                          
-                          {publication.doi && (
-                            <div>
-                              <h4 className="font-medium mb-1">DOI:</h4>
-                              <a 
-                                href={publication.doi.startsWith('http') ? publication.doi : `https://doi.org/${publication.doi}`} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="text-indigo-600 dark:text-indigo-400 hover:underline text-sm"
-                              >
-                                {publication.doi}
-                              </a>
-                            </div>
-                          )}
-                        </div>
-                      </motion.div>
-                    )}
-                  </motion.div>
-                ))}
-              </div>
-              
-              {/* Publication statistics */}
-              <motion.div
+                key="awards"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                className="mt-12 p-6 bg-foreground/5 backdrop-blur-sm rounded-xl border border-foreground/10"
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
               >
-                <h3 className="text-xl font-semibold mb-6 text-center">Publication Statistics</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {awards.map((award, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.3)' }}
+                      className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 p-6 transition-all hover:bg-slate-800/70"
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className={`flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br ${award.color} text-white text-2xl`}>
+                          {award.icon}
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-semibold mb-2 text-slate-100">{award.title}</h3>
+                          <p className="text-slate-300">{award.description}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="text-center p-4 rounded-lg hover:bg-foreground/5 transition-all">
-                    <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-purple-500/20 to-violet-500/20 flex items-center justify-center text-3xl mb-4">
-                      📰
-                    </div>
-                    <h4 className="text-lg font-medium mb-1">{publications.filter(p => p.type === 'journal').length}</h4>
-                    <p className="text-foreground/70">Journal Articles</p>
+                {/* Certificate decoration */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                  className="mt-12 p-8 bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 text-center"
+                >
+                  <div className="mb-4 text-2xl">🎖️</div>
+                  <h3 className="text-xl font-semibold mb-2 text-slate-100">Academic Excellence</h3>
+                  <p className="text-slate-300 max-w-2xl mx-auto">
+                    Recognized at national and institutional levels for academic and research excellence, 
+                    including the highest national honors in Bangladesh for undergraduate achievement.
+                  </p>
+                </motion.div>
+              </motion.div>
+            )}
+            
+            {/* Publications Section */}
+            {activeSection === 'publications' && (
+              <motion.div
+                key="publications"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+              >
+                {/* Filter and sort controls */}
+                <div className="flex flex-wrap justify-center gap-4 mb-8">
+                  <div className="flex p-1 bg-slate-800/50 rounded-full">
+                    <button
+                      onClick={() => setFilterType('all')}
+                      className={`px-4 py-1 rounded-full text-xs font-medium transition-all ${
+                        filterType === 'all' 
+                          ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm' 
+                          : 'text-slate-300 hover:text-white'
+                      }`}
+                    >
+                      All Publications
+                    </button>
+                    <button
+                      onClick={() => setFilterType('journal')}
+                      className={`px-4 py-1 rounded-full text-xs font-medium transition-all ${
+                        filterType === 'journal' 
+                          ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-sm' 
+                          : 'text-slate-300 hover:text-white'
+                      }`}
+                    >
+                      Journal Papers
+                    </button>
+                    <button
+                      onClick={() => setFilterType('conference')}
+                      className={`px-4 py-1 rounded-full text-xs font-medium transition-all ${
+                        filterType === 'conference' 
+                          ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-sm' 
+                          : 'text-slate-300 hover:text-white'
+                      }`}
+                    >
+                      Conference Papers
+                    </button>
                   </div>
                   
-                  <div className="text-center p-4 rounded-lg hover:bg-foreground/5 transition-all">
-                    <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-emerald-500/20 to-green-500/20 flex items-center justify-center text-3xl mb-4">
-                      🎤
-                    </div>
-                    <h4 className="text-lg font-medium mb-1">{publications.filter(p => p.type === 'conference').length}</h4>
-                    <p className="text-foreground/70">Conference Papers</p>
-                  </div>
-                  
-                  <div className="text-center p-4 rounded-lg hover:bg-foreground/5 transition-all">
-                    <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center text-3xl mb-4">
-                      🔬
-                    </div>
-                    <h4 className="text-lg font-medium mb-1">{new Set(publications.map(p => p.field)).size}</h4>
-                    <p className="text-foreground/70">Research Fields</p>
+                  <div className="flex p-1 bg-slate-800/50 rounded-full">
+                    <button
+                      onClick={() => setSortBy('year')}
+                      className={`px-4 py-1 rounded-full text-xs font-medium transition-all ${
+                        sortBy === 'year' 
+                          ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm' 
+                          : 'text-slate-300 hover:text-white'
+                      }`}
+                    >
+                      Sort by Year
+                    </button>
+                    <button
+                      onClick={() => setSortBy('field')}
+                      className={`px-4 py-1 rounded-full text-xs font-medium transition-all ${
+                        sortBy === 'field' 
+                          ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-sm' 
+                          : 'text-slate-300 hover:text-white'
+                      }`}
+                    >
+                      Sort by Field
+                    </button>
                   </div>
                 </div>
+                
+                {/* Publications list */}
+                <div className="space-y-6">
+                  {filteredPublications.map((publication, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 overflow-hidden transition-all hover:bg-slate-800/70"
+                    >
+                      <div 
+                        className="p-6 cursor-pointer"
+                        onClick={() => setSelectedPublication(selectedPublication === index ? null : index)}
+                      >
+                        <div className="flex items-start gap-4">
+                          <div className={`flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full ${
+                            publication.type === 'journal' 
+                              ? 'bg-gradient-to-br from-indigo-600 to-purple-600' 
+                              : 'bg-gradient-to-br from-blue-600 to-indigo-600'
+                          } text-white text-2xl`}>
+                            {publication.type === 'journal' ? '📰' : '🎤'}
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex justify-between items-start">
+                              <div>
+                                <h3 className="text-xl font-semibold mb-1 text-slate-100">
+                                  {publication.title}
+                                </h3>
+                                <p className="text-slate-300 text-sm mb-2">
+                                  {publication.authors.split(',')[0]} et al. ({publication.year})
+                                </p>
+                                <div className="flex flex-wrap gap-2">
+                                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700/70 text-slate-200">
+                                    {publication.field}
+                                  </span>
+                                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                                    publication.type === 'journal' 
+                                      ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300' 
+                                      : 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300'
+                                  }`}>
+                                    {publication.type === 'journal' ? 'Journal' : 'Conference'}
+                                  </span>
+                                </div>
+                              </div>
+                              <button className="text-slate-400">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className={`h-5 w-5 transition-transform ${selectedPublication === index ? 'transform rotate-180' : ''}`}
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {selectedPublication === index && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="px-6 pb-6"
+                        >
+                          <div className="pt-4 ml-16 border-t border-slate-700/50">
+                            <div className="mb-4">
+                              <h4 className="font-medium mb-1 text-slate-200">Authors:</h4>
+                              <p className="text-slate-300 text-sm">{publication.authors}</p>
+                            </div>
+                            
+                            <div className="mb-4">
+                              <h4 className="font-medium mb-1 text-slate-200">{publication.type === 'journal' ? 'Journal:' : 'Conference:'}</h4>
+                              <p className="text-slate-300 text-sm">
+                                {publication.type === 'journal' ? publication.journal : publication.conference}
+                                {publication.volume && `, ${publication.volume}`}
+                              </p>
+                            </div>
+                            
+                            {publication.doi && (
+                              <div>
+                                <h4 className="font-medium mb-1 text-slate-200">DOI:</h4>
+                                <a 
+                                  href={publication.doi.startsWith('http') ? publication.doi : `https://doi.org/${publication.doi}`} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="text-blue-400 hover:text-blue-300 hover:underline text-sm"
+                                >
+                                  {publication.doi}
+                                </a>
+                              </div>
+                            )}
+                          </div>
+                        </motion.div>
+                      )}
+                    </motion.div>
+                  ))}
+                </div>
+                
+                {/* Publication statistics */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.8 }}
+                  className="mt-12 p-6 bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50"
+                >
+                  <h3 className="text-xl font-semibold mb-6 text-center text-slate-100">Publication Statistics</h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="text-center p-4 rounded-lg hover:bg-slate-700/50 transition-all">
+                      <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center text-3xl mb-4">
+                        📰
+                      </div>
+                      <h4 className="text-lg font-medium mb-1 text-slate-100">{publications.filter(p => p.type === 'journal').length}</h4>
+                      <p className="text-slate-300">Journal Articles</p>
+                    </div>
+                    
+                    <div className="text-center p-4 rounded-lg hover:bg-slate-700/50 transition-all">
+                      <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-blue-500/20 to-indigo-500/20 flex items-center justify-center text-3xl mb-4">
+                        🎤
+                      </div>
+                      <h4 className="text-lg font-medium mb-1 text-slate-100">{publications.filter(p => p.type === 'conference').length}</h4>
+                      <p className="text-slate-300">Conference Papers</p>
+                    </div>
+                    
+                    <div className="text-center p-4 rounded-lg hover:bg-slate-700/50 transition-all">
+                      <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center text-3xl mb-4">
+                        🔬
+                      </div>
+                      <h4 className="text-lg font-medium mb-1 text-slate-100">{new Set(publications.map(p => p.field)).size}</h4>
+                      <p className="text-slate-300">Research Fields</p>
+                    </div>
+                  </div>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );

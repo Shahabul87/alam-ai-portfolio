@@ -156,29 +156,29 @@ export default function ExperienceSection() {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-20 overflow-hidden bg-background"
+      className="relative py-20 overflow-hidden w-full"
       id="experience"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 pointer-events-none opacity-10">
-        <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-gradient-to-r from-indigo-500/30 to-purple-500/30 blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-60 h-60 rounded-full bg-gradient-to-r from-blue-500/30 to-cyan-500/30 blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 blur-3xl" />
+        <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-gradient-to-r from-blue-500/30 to-purple-500/30 blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-60 h-60 rounded-full bg-gradient-to-r from-blue-500/30 to-indigo-500/30 blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-gradient-to-r from-indigo-500/10 to-purple-500/10 blur-3xl" />
       </div>
       
-      <div className="container mx-auto px-4">
+      <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 max-w-screen-lg mx-auto"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 glow-purple">
               Research & Professional Experience
             </span>
           </h2>
-          <p className="text-foreground/70 max-w-2xl mx-auto text-lg">
+          <p className="text-slate-300 max-w-2xl mx-auto text-lg">
             A journey through academic research and industry applications in artificial intelligence
             and engineering innovation.
           </p>
@@ -186,13 +186,13 @@ export default function ExperienceSection() {
         
         {/* Tab selector */}
         <div className="flex justify-center mb-12">
-          <div className="flex p-1 bg-foreground/5 rounded-full">
+          <div className="flex p-1 bg-slate-800/50 rounded-full">
             <button
               onClick={() => handleTabChange('research')}
               className={`px-6 py-2 rounded-full font-medium text-sm transition-all ${
                 selectedTab === 'research' 
-                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md' 
-                  : 'text-foreground/70 hover:text-foreground'
+                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md' 
+                  : 'text-slate-300 hover:text-white'
               }`}
             >
               Research
@@ -201,8 +201,8 @@ export default function ExperienceSection() {
               onClick={() => handleTabChange('professional')}
               className={`px-6 py-2 rounded-full font-medium text-sm transition-all ${
                 selectedTab === 'professional' 
-                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md' 
-                  : 'text-foreground/70 hover:text-foreground'
+                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md' 
+                  : 'text-slate-300 hover:text-white'
               }`}
             >
               Professional
@@ -210,262 +210,264 @@ export default function ExperienceSection() {
           </div>
         </div>
         
-        {/* Research Experience */}
-        {selectedTab === 'research' && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="space-y-8"
-          >
-            {researchExperiences.map((experience, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-foreground/5 backdrop-blur-sm rounded-xl border border-foreground/10 overflow-hidden transition-all hover:bg-foreground/10"
-              >
-                <div 
-                  className="p-6 cursor-pointer"
-                  onClick={() => toggleExpand(index)}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className={`flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br ${experience.color} text-white text-2xl`}>
-                      {experience.icon}
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h3 className="text-xl font-semibold mb-1">
-                            {experience.title}
-                            {experience.current && (
-                              <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 dark:bg-green-800/30 dark:text-green-500">
-                                Current
-                              </span>
-                            )}
-                          </h3>
-                          <p className="text-foreground/70">
-                            {experience.organization}
-                            {experience.duration && <span className="ml-2 text-sm">({experience.duration})</span>}
-                          </p>
-                        </div>
-                        <button className="text-foreground/50">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className={`h-5 w-5 transition-transform ${expandedItem === index ? 'transform rotate-180' : ''}`}
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                {expandedItem === index && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="px-6 pb-6"
-                  >
-                    <div className="pt-4 ml-16 border-t border-foreground/10">
-                      <h4 className="font-medium mb-2">Research Focus:</h4>
-                      <ul className="space-y-2 mb-6">
-                        {experience.details.map((detail, i) => (
-                          <li key={i} className="flex items-start gap-2">
-                            <span className={`text-transparent bg-clip-text bg-gradient-to-r ${experience.color} mt-1`}>•</span>
-                            <span className="text-foreground/80">{detail}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      
-                      <h4 className="font-medium mb-2">Technologies:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {experience.technologies.map((tech, i) => (
-                          <span 
-                            key={i}
-                            className={`inline-flex px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${experience.color} bg-opacity-10 text-foreground/90`}
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </motion.div>
-            ))}
-            
-            {/* Research keywords cloud */}
+        <div className="max-w-screen-xl mx-auto">
+          {/* Research Experience */}
+          {selectedTab === 'research' && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="mt-12 p-6 bg-foreground/5 backdrop-blur-sm rounded-xl border border-foreground/10"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="space-y-8"
             >
-              <h3 className="text-xl font-semibold mb-4 text-center">Research Keywords</h3>
-              <div className="flex flex-wrap justify-center gap-3">
-                {Object.entries(coreCompetencies).flatMap(([category, skills]) => 
-                  skills.map((skill, i) => (
-                    <motion.div
-                      key={`${category}-${i}`}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.4, delay: i * 0.02 + 0.7 }}
-                      className="px-3 py-1 rounded-full text-sm bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 transition-all"
-                    >
-                      {skill}
-                    </motion.div>
-                  ))
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-        
-        {/* Professional Experience */}
-        {selectedTab === 'professional' && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="relative"
-          >
-            {/* Timeline stem */}
-            <div className="absolute left-[15px] md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-indigo-600/70 via-purple-600/70 to-pink-600/70 transform md:translate-x-[-0.5px]" />
-            
-            {/* Timeline items */}
-            <div className="space-y-12">
-              {professionalExperiences.map((experience, index) => (
+              {researchExperiences.map((experience, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`relative flex ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} flex-col md:gap-8`}
+                  className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 overflow-hidden transition-all hover:bg-slate-800/70"
                 >
-                  {/* Timeline dot */}
-                  <div className="absolute left-[7px] md:left-1/2 top-6 w-6 h-6 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 border-2 border-background transform md:translate-x-[-50%] z-10" />
-                  
-                  {/* Date on mobile */}
-                  <div className="md:hidden ml-12 mb-2 text-sm font-medium text-foreground/60">
-                    {experience.duration} <span className="text-foreground/40">({experience.years})</span>
-                  </div>
-                  
-                  {/* Content */}
                   <div 
-                    className={`md:w-1/2 ml-12 md:ml-0 ${index % 2 === 0 ? 'md:text-right md:pr-8' : 'md:text-left md:pl-8'}`}
+                    className="p-6 cursor-pointer"
+                    onClick={() => toggleExpand(index)}
                   >
-                    <div 
-                      className="bg-foreground/5 backdrop-blur-sm p-6 rounded-xl border border-foreground/10 transition-all hover:bg-foreground/10"
-                      onClick={() => toggleExpand(index)}
-                    >
-                      <div className="flex items-start gap-4 mb-3">
-                        <div className={`flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br ${experience.color} text-white text-xl ${index % 2 === 0 ? 'md:order-last' : ''}`}>
-                          {experience.icon}
-                        </div>
-                        <div>
-                          <h3 className="text-xl font-semibold">{experience.title}</h3>
-                          <p className="text-foreground/70 text-sm">{experience.organization}</p>
-                          <p className="text-foreground/60 text-xs">{experience.department}</p>
-                        </div>
+                    <div className="flex items-start gap-4">
+                      <div className={`flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br ${experience.color} text-white text-2xl`}>
+                        {experience.icon}
                       </div>
-                      
-                      {/* Date on desktop */}
-                      <div className="hidden md:block text-sm font-medium text-foreground/60">
-                        {experience.duration} <span className="text-foreground/40">({experience.years})</span>
-                      </div>
-                      
-                      {expandedItem === index && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className={`mt-4 pt-4 border-t border-foreground/10 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}
-                        >
-                          <h4 className="font-medium mb-2">Responsibilities:</h4>
-                          <ul className={`space-y-2 ${index % 2 === 0 ? 'md:list-position-inside' : ''}`}>
-                            {experience.responsibilities.map((responsibility, i) => (
-                              <li key={i} className={`flex items-start gap-2 ${index % 2 === 0 ? 'md:justify-end' : ''}`}>
-                                <span className={`text-transparent bg-clip-text bg-gradient-to-r ${experience.color} mt-1 ${index % 2 === 0 ? 'md:order-last' : ''}`}>•</span>
-                                <span className="text-foreground/80">{responsibility}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </motion.div>
-                      )}
-                      
-                      <div className="mt-4 text-center">
-                        <button 
-                          onClick={() => toggleExpand(index)}
-                          className="text-foreground/50"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className={`h-5 w-5 inline transition-transform ${expandedItem === index ? 'transform rotate-180' : ''}`}
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                          </svg>
-                        </button>
+                      <div className="flex-1">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <h3 className="text-xl font-semibold mb-1 text-slate-100">
+                              {experience.title}
+                              {experience.current && (
+                                <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 dark:bg-green-800/30 dark:text-green-500">
+                                  Current
+                                </span>
+                              )}
+                            </h3>
+                            <p className="text-slate-300">
+                              {experience.organization}
+                              {experience.duration && <span className="ml-2 text-sm text-slate-400">({experience.duration})</span>}
+                            </p>
+                          </div>
+                          <button className="text-slate-400">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className={`h-5 w-5 transition-transform ${expandedItem === index ? 'transform rotate-180' : ''}`}
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
                   
-                  {/* Empty div for alignment on mobile */}
-                  <div className="hidden md:block md:w-1/2" />
+                  {expandedItem === index && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="px-6 pb-6"
+                    >
+                      <div className="pt-4 ml-16 border-t border-slate-700/50">
+                        <h4 className="font-medium mb-2 text-slate-200">Research Focus:</h4>
+                        <ul className="space-y-2 mb-6">
+                          {experience.details.map((detail, i) => (
+                            <li key={i} className="flex items-start gap-2">
+                              <span className={`text-transparent bg-clip-text bg-gradient-to-r ${experience.color} mt-1`}>•</span>
+                              <span className="text-slate-300">{detail}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        
+                        <h4 className="font-medium mb-2 text-slate-200">Technologies:</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {experience.technologies.map((tech, i) => (
+                            <span 
+                              key={i}
+                              className={`inline-flex px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${experience.color} bg-opacity-10 text-slate-200`}
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
                 </motion.div>
               ))}
-            </div>
-            
-            {/* Career achievements */}
+              
+              {/* Research keywords cloud */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="mt-12 p-6 bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50"
+              >
+                <h3 className="text-xl font-semibold mb-4 text-center text-slate-100">Research Keywords</h3>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {Object.entries(coreCompetencies).flatMap(([category, skills]) => 
+                    skills.map((skill, i) => (
+                      <motion.div
+                        key={`${category}-${i}`}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.4, delay: i * 0.02 + 0.7 }}
+                        className="px-3 py-1 rounded-full text-sm bg-slate-800/70 border border-slate-700/50 hover:bg-slate-700/70 transition-all text-slate-300"
+                      >
+                        {skill}
+                      </motion.div>
+                    ))
+                  )}
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+          
+          {/* Professional Experience */}
+          {selectedTab === 'professional' && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="mt-16 p-6 bg-foreground/5 backdrop-blur-sm rounded-xl border border-foreground/10"
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="relative"
             >
-              <h3 className="text-xl font-semibold mb-6 text-center">Career Highlights</h3>
+              {/* Timeline stem */}
+              <div className="absolute left-[15px] md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-600/70 via-indigo-600/70 to-purple-600/70 transform md:translate-x-[-0.5px]" />
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center p-4 rounded-lg hover:bg-foreground/5 transition-all">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center text-3xl mb-4">
-                    🎓
-                  </div>
-                  <h4 className="text-lg font-medium mb-2">12+ Years</h4>
-                  <p className="text-foreground/70">Academic Experience</p>
-                </div>
-                
-                <div className="text-center p-4 rounded-lg hover:bg-foreground/5 transition-all">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center text-3xl mb-4">
-                    🔬
-                  </div>
-                  <h4 className="text-lg font-medium mb-2">10+ Years</h4>
-                  <p className="text-foreground/70">Research Leadership</p>
-                </div>
-                
-                <div className="text-center p-4 rounded-lg hover:bg-foreground/5 transition-all">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center text-3xl mb-4">
-                    💼
-                  </div>
-                  <h4 className="text-lg font-medium mb-2">11+ Years</h4>
-                  <p className="text-foreground/70">Industry Consultancy</p>
-                </div>
+              {/* Timeline items */}
+              <div className="space-y-12">
+                {professionalExperiences.map((experience, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className={`relative flex ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} flex-col md:gap-8`}
+                  >
+                    {/* Timeline dot */}
+                    <div className="absolute left-[7px] md:left-1/2 top-6 w-6 h-6 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 border-2 border-slate-900 transform md:translate-x-[-50%] z-10" />
+                    
+                    {/* Date on mobile */}
+                    <div className="md:hidden ml-12 mb-2 text-sm font-medium text-slate-400">
+                      {experience.duration} <span className="text-slate-500">({experience.years})</span>
+                    </div>
+                    
+                    {/* Content */}
+                    <div 
+                      className={`md:w-1/2 ml-12 md:ml-0 ${index % 2 === 0 ? 'md:text-right md:pr-8' : 'md:text-left md:pl-8'}`}
+                    >
+                      <div 
+                        className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700/50 transition-all hover:bg-slate-800/70"
+                        onClick={() => toggleExpand(index)}
+                      >
+                        <div className="flex items-start gap-4 mb-3">
+                          <div className={`flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br ${experience.color} text-white text-xl ${index % 2 === 0 ? 'md:order-last' : ''}`}>
+                            {experience.icon}
+                          </div>
+                          <div>
+                            <h3 className="text-xl font-semibold text-slate-100">{experience.title}</h3>
+                            <p className="text-slate-300 text-sm">{experience.organization}</p>
+                            <p className="text-slate-400 text-xs">{experience.department}</p>
+                          </div>
+                        </div>
+                        
+                        {/* Date on desktop */}
+                        <div className="hidden md:block text-sm font-medium text-slate-400">
+                          {experience.duration} <span className="text-slate-500">({experience.years})</span>
+                        </div>
+                        
+                        {expandedItem === index && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className={`mt-4 pt-4 border-t border-slate-700/50 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}
+                          >
+                            <h4 className="font-medium mb-2 text-slate-200">Responsibilities:</h4>
+                            <ul className={`space-y-2 ${index % 2 === 0 ? 'md:list-position-inside' : ''}`}>
+                              {experience.responsibilities.map((responsibility, i) => (
+                                <li key={i} className={`flex items-start gap-2 ${index % 2 === 0 ? 'md:justify-end' : ''}`}>
+                                  <span className={`text-transparent bg-clip-text bg-gradient-to-r ${experience.color} mt-1 ${index % 2 === 0 ? 'md:order-last' : ''}`}>•</span>
+                                  <span className="text-slate-300">{responsibility}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </motion.div>
+                        )}
+                        
+                        <div className="mt-4 text-center">
+                          <button 
+                            onClick={() => toggleExpand(index)}
+                            className="text-slate-400"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className={`h-5 w-5 inline transition-transform ${expandedItem === index ? 'transform rotate-180' : ''}`}
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Empty div for alignment on mobile */}
+                    <div className="hidden md:block md:w-1/2" />
+                  </motion.div>
+                ))}
               </div>
+              
+              {/* Career achievements */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                className="mt-16 p-6 bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50"
+              >
+                <h3 className="text-xl font-semibold mb-6 text-center text-slate-100">Career Highlights</h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="text-center p-4 rounded-lg hover:bg-slate-700/50 transition-all">
+                    <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-blue-500/20 to-indigo-500/20 flex items-center justify-center text-3xl mb-4">
+                      🎓
+                    </div>
+                    <h4 className="text-lg font-medium mb-2 text-slate-100">12+ Years</h4>
+                    <p className="text-slate-300">Academic Experience</p>
+                  </div>
+                  
+                  <div className="text-center p-4 rounded-lg hover:bg-slate-700/50 transition-all">
+                    <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center text-3xl mb-4">
+                      🔬
+                    </div>
+                    <h4 className="text-lg font-medium mb-2 text-slate-100">10+ Years</h4>
+                    <p className="text-slate-300">Research Leadership</p>
+                  </div>
+                  
+                  <div className="text-center p-4 rounded-lg hover:bg-slate-700/50 transition-all">
+                    <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center text-3xl mb-4">
+                      💼
+                    </div>
+                    <h4 className="text-lg font-medium mb-2 text-slate-100">11+ Years</h4>
+                    <p className="text-slate-300">Industry Consultancy</p>
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
+          )}
+        </div>
       </div>
     </section>
   );
